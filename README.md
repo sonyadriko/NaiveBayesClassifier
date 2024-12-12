@@ -21,6 +21,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 
 # 🎨 **Tampilan**
 - Halaman Input Data
+
 💡 Form input memungkinkan pengguna untuk memasukkan data seperti:
   Ekstrakurikuler
   Jenis Kelamin
