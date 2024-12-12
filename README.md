@@ -20,8 +20,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 ---
 
 # 🎨 **Tampilan**
-- Halaman Input Data
-
+1. Halaman Input Data
 💡 Form input memungkinkan pengguna untuk memasukkan data seperti:
   Ekstrakurikuler
   Jenis Kelamin
@@ -29,7 +28,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
   Pengalaman Organisasi
   Sertifikasi Profesi
   Tempat Kerja dan Magang
-- Hasil Prediksi
+2. Hasil Prediksi
 Hasil prediksi mencakup:
   - ✅ Predicted Class: Menunjukkan apakah hasilnya "Ya" atau "Tidak."
   - ⚛ Posteriors: Probabilitas akhir untuk setiap kelas.
@@ -62,20 +61,20 @@ Buka browser Anda dan akses: http://localhost:5000
 
 # 🌐 **Endpoint Backend**
 Aplikasi backend mendukung beberapa endpoint penting:
-- /upload: Mengunggah data siswa untuk diproses.
-- /convert: Mengonversi format data yang diunggah menjadi format yang sesuai.
-- /predict: Melakukan prediksi berdasarkan data yang dimasukkan.
-- /get_labels: Mendapatkan label data.
-- /readdata: Membaca data dari database untuk analisis lebih lanjut.
+1. /upload: Mengunggah data siswa untuk diproses.
+2. /convert: Mengonversi format data yang diunggah menjadi format yang sesuai.
+3. /predict: Melakukan prediksi berdasarkan data yang dimasukkan.
+4. /get_labels: Mendapatkan label data.
+5. /readdata: Membaca data dari database untuk analisis lebih lanjut.
 Setiap endpoint berkomunikasi menggunakan JSON dan memberikan respons yang mudah dipahami oleh pengguna maupun pengembang.
 
 ---
 
 # 🎮 Cara Kerja
 
-- Input Data: Pengguna memasukkan atribut siswa.
-- Proses Prediksi: Algoritma Naïve Bayes menghitung likelihood, prior, dan posterior untuk menentukan kelas.
-- Hasil Ditampilkan: Sistem menampilkan Predicted Class bersama probabilitasnya.
+1. Input Data: Pengguna memasukkan atribut siswa.
+2. Proses Prediksi: Algoritma Naïve Bayes menghitung likelihood, prior, dan posterior untuk menentukan kelas.
+3. Hasil Ditampilkan: Sistem menampilkan Predicted Class bersama probabilitasnya.
 
 ---
 
@@ -83,11 +82,11 @@ Setiap endpoint berkomunikasi menggunakan JSON dan memberikan respons yang mudah
 
 Kami terbuka untuk kontribusi! 🚀 Jika Anda ingin menambahkan fitur atau memperbaiki bug, silakan fork repositori ini dan kirimkan pull request.
 Cara Kontribusi
-- Fork repositori ini.
-- Buat branch baru: git checkout -b fitur-baru.
-- Commit perubahan Anda: git commit -m 'Menambahkan fitur baru'.
-- Push branch: git push origin fitur-baru.
-- Buat pull request di GitHub.
+1. Fork repositori ini.
+2. Buat branch baru: git checkout -b fitur-baru.
+3. Commit perubahan Anda: git commit -m 'Menambahkan fitur baru'.
+4. Push branch: git push origin fitur-baru.
+5. Buat pull request di GitHub.
   
 ---
 
