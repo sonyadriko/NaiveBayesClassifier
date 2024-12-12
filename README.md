@@ -20,7 +20,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 ---
 
 # 🎨 **Tampilan**
-- 1. Halaman Input Data
+- Halaman Input Data
 💡 Form input memungkinkan pengguna untuk memasukkan data seperti:
   Ekstrakurikuler
   Jenis Kelamin
@@ -28,12 +28,12 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
   Pengalaman Organisasi
   Sertifikasi Profesi
   Tempat Kerja dan Magang
-- 2. Hasil Prediksi
+- Hasil Prediksi
 Hasil prediksi mencakup:
-  -- ✅ Predicted Class: Menunjukkan apakah hasilnya "Ya" atau "Tidak."
-  -- ⚛ Posteriors: Probabilitas akhir untuk setiap kelas.
-  -- 🔢 Likelihoods: Probabilitas atribut untuk setiap kelas.
-  -- 🔐 Priors: Probabilitas awal dari setiap kelas.
+  - ✅ Predicted Class: Menunjukkan apakah hasilnya "Ya" atau "Tidak."
+  - ⚛ Posteriors: Probabilitas akhir untuk setiap kelas.
+  - 🔢 Likelihoods: Probabilitas atribut untuk setiap kelas.
+  - 🔐 Priors: Probabilitas awal dari setiap kelas.
 ---
 # 📒 **Instalasi dan Penggunaan**
 - Langkah 1: Clone Repositori
