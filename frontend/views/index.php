@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
-    header('Location: login.php');
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -64,101 +55,37 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <div class="btn-group float-right">
-                                        <ol class="breadcrumb hide-phone p-0 m-0">
-                                            <li class="breadcrumb-item"><a href="#">Annex</a></li>
-                                            <li class="breadcrumb-item active">Dashboard</li>
-                                        </ol>
-                                    </div>
                                     <h4 class="page-title">Dashboard</h4>
                                 </div>
                             </div>
                         </div>
                         <!-- end page title end breadcrumb -->
+
+                        <!-- Explanation of Naive Bayes Classifier -->
                         <div class="row">
-                            <div class="col-md-6 col-xl-3">
-                                <div class="mini-stat clearfix bg-white">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-                                            <img src="../assets/images/coins/btc.png" alt="" class="rounded-curcle">
-                                        </div>
-                                        <div class="col-4">
-                                            <h4 class="counter text-dark m-0 pb-1">$ 11852</h4>
-                                            <i class="mdi mdi-arrow-down text-danger"></i> <small
-                                                class="text-danger">-5.45%</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#" class="btn btn-success btn-sm float-right">Buy</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="sparkline0"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3">
-                                <div class="mini-stat clearfix bg-white">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-                                            <img src="../assets/images/coins/eth.png" alt="" class="rounded-curcle">
-                                        </div>
-                                        <div class="col-4">
-                                            <h4 class="counter text-dark m-0 pb-1">$ 956</h4>
-                                            <i class="mdi mdi-arrow-up text-success"></i> <small
-                                                class="text-success">+1.45%</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#" class="btn btn-danger btn-sm float-right">Sell</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="sparkline1"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3  align-items-center">
-                                <div class="mini-stat clearfix bg-white">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-                                            <img src="../assets/images/coins/dash.png" alt="" class="rounded-curcle">
-                                        </div>
-                                        <div class="col-4">
-                                            <h4 class="counter text-dark m-0 pb-1">$ 825</h4>
-                                            <i class="mdi mdi-arrow-down text-danger"></i> <small
-                                                class="text-danger">-5.45%</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#" class="btn btn-success btn-sm float-right">Buy</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="sparkline2"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3">
-                                <div class="mini-stat clearfix bg-white">
-                                    <div class="row align-items-center">
-                                        <div class="col-4">
-                                            <img src="../assets/images/coins/lite.png" alt="" class="rounded-curcle">
-                                        </div>
-                                        <div class="col-4">
-                                            <h4 class="counter text-dark m-0 pb-1">$ 250</h4>
-                                            <i class="mdi mdi-arrow-up text-success"></i> <small
-                                                class="text-success">+1.45%</small>
-                                        </div>
-                                        <div class="col-4">
-                                            <a href="#" class="btn btn-danger btn-sm float-right">Sell</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="sparkline3"></div>
-                                        </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Naive Bayes Classifier</h4>
+                                        <p class="text-muted">
+                                            The Naive Bayes Classifier is a probabilistic machine learning model used for classification tasks. 
+                                            It is based on Bayes' Theorem, which describes the probability of an event based on prior knowledge of conditions 
+                                            that might be related to the event. The classifier assumes that the presence of a particular feature in a class 
+                                            is unrelated to the presence of any other feature, hence the term "naive".
+                                        </p>
+                                        <p class="text-muted">
+                                            Despite its simplicity, the Naive Bayes Classifier can perform surprisingly well in many real-world applications, 
+                                            especially for text classification tasks such as spam detection, sentiment analysis, and document categorization.
+                                        </p>
+                                        <p class="text-muted">
+                                            The key advantages of the Naive Bayes Classifier include its simplicity, efficiency, and ability to handle large datasets. 
+                                            However, it relies on the assumption of feature independence, which may not always hold true in practice.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!--end row-->
+                        <!-- end explanation -->
 
                     </div><!-- container -->
 
