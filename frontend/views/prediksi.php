@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Dashboard</title>
+    <title>Prediksi</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,8 +21,8 @@
     <style>
     .result-box {
         border: 1px solid #ddd;
-        padding: 15px;
-        margin-bottom: 10px;
+        padding: 10px;
+        margin-bottom: 4px;
         background-color: #f9f9f9;
         border-radius: 5px;
     }
@@ -41,7 +41,6 @@
     .result-box pre {
         font-size: 14px;
         background-color: #f4f4f4;
-        padding: 10px;
         border-radius: 4px;
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -97,7 +96,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Dashboard</h4>
+                                    <h4 class="page-title">Prediksi</h4>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +172,7 @@
 
                                                 <div class="text-center">
                                                     <button type="submit"
-                                                        class="btn btn-primary px-4 py-2">Kirim</button>
+                                                        class="btn btn-primary px-4 py-2">Submit</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -206,7 +205,7 @@
             </div> <!-- content -->
 
             <footer class="footer">
-                © 2024 Naive Bayes
+                © 2025 Naive Bayes
             </footer>
 
         </div>
@@ -267,18 +266,20 @@
                     <div class="result-box">
                         <p><strong>Predicted Class:</strong> <span class="result">${translate(response.predicted_class)}</span></p>
                     </div>
-                    <div class="result-box">
-                        <h4>Posteriors:</h4>
-                        <pre><code>${JSON.stringify(response.posteriors, null, 2)}</code></pre>
+                      <div class="result-box">
+                        <h4>Priors:</h4>
+                        <pre><code>${JSON.stringify(response.priors, null, 2)}</code></pre>
                     </div>
                     <div class="result-box">
                         <h4>Likelihoods:</h4>
                         <pre><code>${JSON.stringify(response.likelihoods, null, 2)}</code></pre>
                     </div>
                     <div class="result-box">
-                        <h4>Priors:</h4>
-                        <pre><code>${JSON.stringify(response.priors, null, 2)}</code></pre>
+                        <h4>Posteriors:</h4>
+                        <pre><code>${JSON.stringify(response.posteriors, null, 2)}</code></pre>
                     </div>
+                    
+                  
                 `);
                 },
                 error: function(xhr, status, error) {

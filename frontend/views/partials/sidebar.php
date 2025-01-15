@@ -1,10 +1,11 @@
 <?php session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
-    header('Location: login.php');
-    exit();
-} ?>
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
+//     header('Location: login.php');
+//     exit();
+// } 
+?>
 <div class="left side-menu">
     <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
         <i class="ion-close"></i>
@@ -34,6 +35,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE) {
                 <li>
                     <a href="prediksi.php" class="waves-effect"><i class="mdi mdi-wallet"></i><span> Prediksi</span></a>
                 </li>
+                <li>
+    <a href="evaluasi.php" class="waves-effect"><i class="mdi mdi-chart-bar"></i><span> Evaluasi</span></a>
+</li>
+
             </ul>
         </div>
         <div class="clearfix"></div>

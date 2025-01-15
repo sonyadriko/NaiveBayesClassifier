@@ -5,6 +5,8 @@ from sklearn.preprocessing import LabelEncoder
 from flask_cors import CORS
 from io import BytesIO
 import os
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
 # Membuat instance aplikasi Flask
 app = Flask(__name__)
 CORS(app)
@@ -118,10 +120,6 @@ class NaiveBayesClassifier:
 
     #tanpa evidence
     def predict(self, features):
-        """
-        Memprediksi kelas berdasarkan fitur yang diberikan dan mengembalikan prior, likelihood, dan posterior 
-        (tanpa normalisasi dengan evidence).
-        """
         posteriors = {}
         likelihood_details = {}
         
@@ -145,11 +143,11 @@ class NaiveBayesClassifier:
             posteriors[cls] = prior * likelihood
             likelihood_details[cls] = feature_likelihoods
             
-            print(f"Class: {cls}")
-            print(f"Prior: {prior}")
-            print(f"Likelihood Details: {feature_likelihoods}")
-            print(f"Likelihood Product: {likelihood}")
-            print(f"Posterior (before normalization): {posteriors[cls]}")
+            # print(f"Class: {cls}")
+            # print(f"Prior: {prior}")
+            # print(f"Likelihood Details: {feature_likelihoods}")
+            # print(f"Likelihood Product: {likelihood}")
+            # print(f"Posterior (before normalization): {posteriors[cls]}")
 
         # Menentukan kelas yang diprediksi
         predicted_class = max(posteriors, key=posteriors.get)
@@ -200,7 +198,7 @@ def predict():
     try:
         data = pd.read_excel('proses_data.xlsx')
         # Pelatihan model
-        X = data.drop(columns=['Durasi Mendapat Kerja'])  # Asumsikan 'Durasi Mendapat Kerja' adalah kolom label
+        X = data.drop(columns=['Durasi Mendapat Kerja']) 
         y = data['Durasi Mendapat Kerja']
         nb = NaiveBayesClassifier()
         nb.train(X, y)
@@ -211,7 +209,7 @@ def predict():
         predicted_class, posteriors, likelihood_details = nb.predict(input_data)
 
         # Menambahkan prior ke dalam respons
-        priors = nb.class_probs  # Menambahkan prior ke respons
+        priors = nb.class_probs  
 
         # Mengubah hasil prediksi menjadi tipe yang dapat diserialisasi JSON
         predicted_class = convert_to_serializable(predicted_class)
@@ -223,7 +221,7 @@ def predict():
             "predicted_class": predicted_class,
             "posteriors": posteriors,
             "likelihoods": likelihood_details,
-            "priors": priors  # Menambahkan nilai prior ke dalam respons
+            "priors": priors 
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
@@ -278,6 +276,42 @@ def read_proses_data():
         
         return jsonify({"data": data_json}), 200
     except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route('/test_confusion_matrix', methods=['POST'])
+def test_confusion_matrix():
+    try:
+        print("Loading dataset...")  # Log
+        # Load dataset
+        data = pd.read_excel('proses_data.xlsx')
+        X = data.drop(columns=['Durasi Mendapat Kerja'])
+        y = data['Durasi Mendapat Kerja']
+
+        print(f"Dataset loaded. Shape: X = {X.shape}, y = {y.shape}")  # Log
+
+        # Split dataset
+        data = request.get_json()
+        test_size = data.get('test_size', 0.2)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        print(f"Data split: X_train = {X_train.shape}, X_test = {X_test.shape}, y_train = {y_train.shape}, y_test = {y_test.shape}")  # Log
+
+        # Calculate confusion matrix
+        cm = confusion_matrix(y_test, y_test)  # Confusion matrix for actual vs actual (just for testing)
+        print(f"Confusion Matrix: {cm}")  # Log
+
+        # Convert confusion matrix to standard Python types for JSON serialization
+        cm_serializable = cm.astype(int).tolist()
+        print(f"Confusion Matrix (Serializable): {cm_serializable}")  # Log
+
+        return jsonify({
+            "test_size": test_size,
+            "confusion_matrix": cm_serializable,
+            "labels": y.unique().tolist()
+        }), 200
+
+    except Exception as e:
+        print(f"Error: {str(e)}")  # Log error
         return jsonify({"error": str(e)}), 400
 
 

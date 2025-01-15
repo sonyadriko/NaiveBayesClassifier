@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Annex - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Login</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,7 +30,7 @@
                 <div class="card-body">
 
                     <h3 class="text-center mt-0 m-b-15">
-                        <a href="index.html" class="logo logo-admin"><img src="../assets/images/logo.png" height="24" alt="logo"></a>
+                        <a href="" class="logo"><i class="mdi mdi-assistant"></i> Naive Bayes</a>
                     </h3>
 
                     <div class="p-3">

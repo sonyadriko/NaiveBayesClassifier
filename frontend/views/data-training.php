@@ -71,7 +71,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title">Data from Server</h4>
+                                        <h4 class="header-title">Data Training</h4>
                                         <div class="table-responsive">
                                             <table id="data-table" class="table table-striped table-bordered">
                                                 <thead>
@@ -94,7 +94,7 @@
             </div>
 
             <footer class="footer">
-                © 2024 Naive Bayes
+                © 2025 Naive Bayes
             </footer>
         </div>
     </div>

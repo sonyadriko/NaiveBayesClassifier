@@ -68,18 +68,13 @@
                                     <div class="card-body">
                                         <h4 class="header-title">Naive Bayes Classifier</h4>
                                         <p class="text-muted">
-                                            The Naive Bayes Classifier is a probabilistic machine learning model used for classification tasks. 
-                                            It is based on Bayes' Theorem, which describes the probability of an event based on prior knowledge of conditions 
-                                            that might be related to the event. The classifier assumes that the presence of a particular feature in a class 
-                                            is unrelated to the presence of any other feature, hence the term "naive".
+                                        Naive Bayes Classifier adalah model pembelajaran mesin probabilistik yang digunakan untuk tugas-tugas klasifikasi. Model ini didasarkan pada Teorema Bayes, yang menggambarkan probabilitas suatu peristiwa berdasarkan pengetahuan sebelumnya tentang kondisi yang mungkin terkait dengan peristiwa tersebut. Pengklasifikasi mengasumsikan bahwa keberadaan fitur tertentu dalam suatu kelas tidak terkait dengan keberadaan fitur lainnya.
                                         </p>
                                         <p class="text-muted">
-                                            Despite its simplicity, the Naive Bayes Classifier can perform surprisingly well in many real-world applications, 
-                                            especially for text classification tasks such as spam detection, sentiment analysis, and document categorization.
+                                        Terlepas dari kesederhanaannya, Naive Bayes Classifier dapat bekerja dengan sangat baik di banyak aplikasi dunia nyata, terutama untuk tugas-tugas klasifikasi teks seperti deteksi spam, analisis sentimen, dan kategorisasi dokumen.
                                         </p>
                                         <p class="text-muted">
-                                            The key advantages of the Naive Bayes Classifier include its simplicity, efficiency, and ability to handle large datasets. 
-                                            However, it relies on the assumption of feature independence, which may not always hold true in practice.
+                                        Keuntungan utama dari Naive Bayes Classifier meliputi kesederhanaan, efisiensi, dan kemampuannya untuk menangani kumpulan data yang besar. Namun, metode ini bergantung pada asumsi independensi fitur, yang mungkin tidak selalu benar dalam praktiknya.
                                         </p>
                                     </div>
                                 </div>
@@ -94,7 +89,7 @@
             </div> <!-- content -->
 
             <footer class="footer">
-                © 2024 Naive Bayes
+                © 2025 Naive Bayes
             </footer>
 
         </div>
