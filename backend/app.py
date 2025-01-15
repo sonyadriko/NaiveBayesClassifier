@@ -6,7 +6,8 @@ from flask_cors import CORS
 from io import BytesIO
 import os
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 # Membuat instance aplikasi Flask
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +29,9 @@ def upload_file():
         if file and (file.filename.endswith('.xls') or file.filename.endswith('.xlsx')):
             # Membaca file Excel yang diunggah langsung dari memori
             data = pd.read_excel(file)
+            
+            upload_path = 'data.xlsx'
+            data.to_excel(upload_path, index=False, sheet_name='Uploaded Data')
 
             # Menampilkan data yang telah dibaca untuk memverifikasi
             print(data.head())
@@ -253,7 +257,7 @@ def read_data():
         file_path = 'data.xlsx'  # Ganti dengan nama file Anda
         
         # Membaca data dari Excel (juga bisa CSV jika perlu)
-        data = pd.read_excel(file_path)  # Jika CSV, gunakan pd.read_csv(file_path)
+        data = pd.read_excel(file_path) 
         
         # Mengonversi data ke format JSON
         data_json = data.to_dict(orient='records')  # Mengembalikan data sebagai list of dictionaries
@@ -281,39 +285,44 @@ def read_proses_data():
 @app.route('/test_confusion_matrix', methods=['POST'])
 def test_confusion_matrix():
     try:
-        print("Loading dataset...")  # Log
-        # Load dataset
         data = pd.read_excel('proses_data.xlsx')
         X = data.drop(columns=['Durasi Mendapat Kerja'])
         y = data['Durasi Mendapat Kerja']
-
-        print(f"Dataset loaded. Shape: X = {X.shape}, y = {y.shape}")  # Log
-
-        # Split dataset
+        
+        # Membagi dataset menjadi data latih dan data uji
         data = request.get_json()
         test_size = data.get('test_size', 0.2)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
 
-        print(f"Data split: X_train = {X_train.shape}, X_test = {X_test.shape}, y_train = {y_train.shape}, y_test = {y_test.shape}")  # Log
+        # Melatih model Naive Bayes
+        nb = GaussianNB()
+        nb.fit(X_train, y_train)
 
-        # Calculate confusion matrix
-        cm = confusion_matrix(y_test, y_test)  # Confusion matrix for actual vs actual (just for testing)
-        print(f"Confusion Matrix: {cm}")  # Log
+        # Prediksi data uji
+        y_pred = nb.predict(X_test)
 
-        # Convert confusion matrix to standard Python types for JSON serialization
-        cm_serializable = cm.astype(int).tolist()
-        print(f"Confusion Matrix (Serializable): {cm_serializable}")  # Log
+        # Menghitung confusion matrix
+        cm = confusion_matrix(y_test, y_pred)
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='binary')
+        recall = recall_score(y_test, y_pred, average='binary')
+        f1 = f1_score(y_test, y_pred, average='binary')
 
-        return jsonify({
+        cm_serializable = cm.tolist()
+        result = {
             "test_size": test_size,
             "confusion_matrix": cm_serializable,
-            "labels": y.unique().tolist()
-        }), 200
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "f1_score": f1
+        }
+
+        return jsonify(result), 200
 
     except Exception as e:
-        print(f"Error: {str(e)}")  # Log error
+        print(f"Error: {str(e)}")
         return jsonify({"error": str(e)}), 400
-
 
 # Menjalankan aplikasi Flask
 if __name__ == '__main__':

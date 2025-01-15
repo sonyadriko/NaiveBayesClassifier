@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="display: none;">
                             <div class="col-md-12">
                                 <div class="mini-stat clearfix bg-white p-4">
                                     <div id="evaluation-result" style="margin-top: 20px;"></div>
@@ -101,65 +101,76 @@
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#evaluation-form').submit(function (event) {
-                event.preventDefault();
+    $(document).ready(function () {
+        $('#evaluation-form').submit(function (event) {
+            event.preventDefault();
 
-                // Ambil test size dari dropdown
-                const testSize = parseFloat($('#test-size').val());
+            // Ambil test size dari dropdown
+            const testSize = parseFloat($('#test-size').val());
 
-                // Kirim permintaan ke backend
-                $.ajax({
-                    url: 'http://127.0.0.1:5000/test_confusion_matrix',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ test_size: testSize }),
-                    success: function (response) {
-                        // Tampilkan hasil confusion matrix
-                        const matrix = response.confusion_matrix;
-                        const testSizeUsed = response.test_size;
+            // Kirim permintaan ke backend
+            $.ajax({
+                url: 'http://127.0.0.1:5000/test_confusion_matrix',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ test_size: testSize }),
+                success: function (response) {
+                    const matrix = response.confusion_matrix;
+                    const accuracy = response.accuracy;
+                    const precision = response.precision;
+                    const recall = response.recall;
+                    const f1_score = response.f1_score;
+                    const testSizeUsed = response.test_size;
 
-                        let matrixHTML = `
-                            <h3>Confusion Matrix</h3>
-                            <div class="result-box">
-                                <h4>Ukuran Test Data: ${(testSizeUsed * 100).toFixed(0)}%</h4>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Actual \ Predicted</th>
-                        `;
+                    if (matrix && matrix.length > 0 && accuracy !== undefined && precision !== undefined && recall !== undefined && f1_score !== undefined) {
+        // Menyiapkan HTML untuk confusion matrix dan metrik evaluasi
+        let matrixHTML = `
+            <h3>Confusion Matrix</h3>
+            <div class="result-box">
+                <h4>Ukuran Test Data: ${(testSizeUsed * 100).toFixed(0)}%</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Actual\Predicted</th>
+                            <th>Predicted Negatif</th>
+                            <th>Predicted Positif</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th>Predicted Negatif</th><td>${matrix[0][0]}</td><td>${matrix[0][1]}</td></tr>
+                        <tr><th>Predicted Positif</th><td>${matrix[1][0]}</td><td>${matrix[1][1]}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Evaluation Metrics</h4>
+            <div class="result-box">
+                <table>
+                    <tr><td>Akurasi</td><td>${accuracy.toFixed(4)}</td></tr>
+                    <tr><td>Presisi</td><td>${precision.toFixed(4)}</td></tr>
+                    <tr><td>Recall</td><td>${recall.toFixed(4)}</td></tr>
+                    <tr><td>F1-Score</td><td>${f1_score.toFixed(4)}</td></tr>
+                </table>
+            </div>
+        `;
 
-                        // Ambil header berdasarkan keys dari matrix
-                        const labels = Object.keys(matrix);
+        // Menampilkan hasil di elemen #evaluation-result
+        $('#evaluation-result').html(matrixHTML);
 
-                        for (const label of labels) {
-                            matrixHTML += `<th>${label}</th>`;
-                        }
-
-                        matrixHTML += `</tr></thead><tbody>`;
-
-                        for (const actual in matrix) {
-                            matrixHTML += `<tr><th>${actual}</th>`;
-                            for (const predicted of labels) {
-                                matrixHTML += `<td>${matrix[actual][predicted] || 0}</td>`;
-                            }
-                            matrixHTML += `</tr>`;
-                        }
-
-                        matrixHTML += `</tbody></table></div>`;
-
-                        $('#evaluation-result').html(matrixHTML);
-                    },
-                    error: function (xhr, status, error) {
-                        const errorMessage = xhr.responseJSON?.error || 'Terjadi kesalahan yang tidak diketahui.';
-                        $('#evaluation-result').html(
-                            `<div class="alert alert-danger">Error: ${errorMessage}</div>`
-                        );
-                    }
-                });
+        // Menampilkan elemen row jika ada data
+        $('.row').show();
+    } else {
+        // Menyembunyikan elemen jika tidak ada data evaluasi
+        $('.row').hide();
+    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Terjadi kesalahan dalam evaluasi: ' + error);
+                }
             });
         });
-    </script>
+    });
+</script>
+
 </body>
 
 </html>
