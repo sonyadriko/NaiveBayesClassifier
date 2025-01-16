@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>Evaluasi</title>
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
     <style>
         .result-box {
@@ -98,8 +98,10 @@
         </div>
     </div>
 
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
     <script>
     $(document).ready(function () {
         $('#evaluation-form').submit(function (event) {

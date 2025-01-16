@@ -11,8 +11,8 @@
 
         <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
-        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 

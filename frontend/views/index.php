@@ -12,24 +12,18 @@
 
     <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
-    <!-- jvectormap -->
-    <link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
-
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
-
-
 <body class="fixed-left">
-
     <!-- Loader -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div id="status">
             <div class="spinner"></div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -99,50 +93,11 @@
     <!-- END wrapper -->
 
 
-    <!-- jQuery  -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/js/popper.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/modernizr.min.js"></script>
-    <script src="../assets/js/detect.js"></script>
-    <script src="../assets/js/fastclick.js"></script>
-    <script src="../assets/js/jquery.slimscroll.js"></script>
-    <script src="../assets/js/jquery.blockUI.js"></script>
-    <script src="../assets/js/waves.js"></script>
-    <script src="../assets/js/jquery.nicescroll.js"></script>
-    <script src="../assets/js/jquery.scrollTo.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+   
 
-    <!--Morris Chart-->
-    <script src="../assets/plugins/flot-chart/jquery.flot.min.js"></script>
-    <script src="../assets/plugins/flot-chart/jquery.flot.time.js"></script>
-    <script src="../assets/plugins/flot-chart/curvedLines.js"></script>
-    <script src="../assets/plugins/flot-chart/jquery.flot.pie.js"></script>
-    <script src="../assets/plugins/morris/morris.min.js"></script>
-    <script src="../assets/plugins/raphael/raphael-min.js"></script>
-    <script src="../assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-
-
-    <script src="../assets/pages/crypto-dash.init.js"></script>
-
-    <!-- App js -->
-    <script src="../assets/js/app.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#boxscroll").niceScroll({
-            cursorborder: "",
-            cursorcolor: "#cecece",
-            boxzoom: true
-        });
-        $("#boxscroll2").niceScroll({
-            cursorborder: "",
-            cursorcolor: "#cecece",
-            boxzoom: true
-        });
-    });
-    </script>
 
 
 </body>

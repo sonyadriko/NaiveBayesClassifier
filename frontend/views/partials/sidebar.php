@@ -14,33 +14,39 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.php" class="logo"><i class="mdi mdi-assistant"></i> Naive Bayes</a>
-            <!-- <a href="index.html" class="logo"><img src="../assets/images/logo.png" height="24" alt="logo"></a> -->
+            <a href="index.php" class="logo"><i class="fa fa-graduation-cap"></i> Naive Bayes</a>
         </div>
     </div>
 
     <div class="sidebar-inner slimscrollleft">
 
-        <div id="sidebar-menu">
-            <ul>
+    <div id="sidebar-menu">
+    <ul>
+        <li>
+            <a href="index.php" class="waves-effect">
+                <i class="fa fa-television"></i><span> Dashboard</span>
+            </a>
+        </li>
+        <?php if ($_SESSION['role'] !== 'kepala sekolah'): ?>
+        <li>
+            <a href="data-training.php" class="waves-effect">
+                <i class="fa fa-exchange"></i><span> Data Training</span>
+            </a>
+        </li>
+        <?php endif; ?>
+        <li>
+            <a href="prediksi.php" class="waves-effect">
+                <i class="fa fa-credit-card"></i><span> Prediksi</span>
+            </a>
+        </li>
+        <li>
+            <a href="evaluasi.php" class="waves-effect">
+                <i class="fa fa-bar-chart"></i><span> Evaluasi</span>
+            </a>
+        </li>
+    </ul>
+</div>
 
-                <li>
-                    <a href="index.php" class="waves-effect"><i class="mdi mdi-airplay"></i><span> Dashboard</span></a>
-                </li>
-                <?php if ($_SESSION['role'] !== 'kepala sekolah'): ?>
-                <li>
-                    <a href="data-training.php" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> Data Training</span></a>
-                </li>
-                <?php endif; ?>
-                <li>
-                    <a href="prediksi.php" class="waves-effect"><i class="mdi mdi-wallet"></i><span> Prediksi</span></a>
-                </li>
-                <li>
-    <a href="evaluasi.php" class="waves-effect"><i class="mdi mdi-chart-bar"></i><span> Evaluasi</span></a>
-</li>
-
-            </ul>
-        </div>
         <div class="clearfix"></div>
     </div> <!-- end sidebarinner -->
 </div>
