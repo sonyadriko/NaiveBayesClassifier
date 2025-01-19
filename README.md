@@ -13,7 +13,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 ---
 
 # 🛠️ **Teknologi yang Digunakan**
-- Backend: Flask (Python) 📝
+- Backend: Flask, Swagger (Python) 📝
 - Frontend: HTML, CSS, Bootstrap 🌐
 - Komunikasi API: JSON 🔐
 
