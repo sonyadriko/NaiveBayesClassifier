@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource
 from app.services.file_processor import read_file
 
-read_data_ns = Namespace('read_data', description='Membaca data dari file Excel')
+read_data_ns = Namespace('read', description='Membaca data dari file Excel')
 
 @read_data_ns.route('/')
 class ReadData(Resource):

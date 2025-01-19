@@ -144,13 +144,7 @@ class NaiveBayesClassifier:
             # Menghitung posterior tanpa normalisasi
             posteriors[cls] = prior * likelihood
             likelihood_details[cls] = feature_likelihoods
-            
-            # print(f"Class: {cls}")
-            # print(f"Prior: {prior}")
-            # print(f"Likelihood Details: {feature_likelihoods}")
-            # print(f"Likelihood Product: {likelihood}")
-            # print(f"Posterior (before normalization): {posteriors[cls]}")
-
+        
         # Menentukan kelas yang diprediksi
         predicted_class = max(posteriors, key=posteriors.get)
 

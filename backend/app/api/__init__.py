@@ -5,6 +5,7 @@ from app.api.convert import convert_ns
 from app.api.read_data import read_data_ns
 from app.api.predict import predict_bp
 from app.api.get_labels import get_labels_bp
+from app.api.evaluate import evaluate_ns
 
 # This is where the API Blueprint is set up
 def create_app():
@@ -19,5 +20,6 @@ def create_app():
     api.add_namespace(read_data_ns, path='/read')
     api.add_namespace(predict_bp, path='/predict')
     api.add_namespace(get_labels_bp, path='/get_labels')
+    api.add_namespace(evaluate_ns, path='/evaluate')
 
     return app

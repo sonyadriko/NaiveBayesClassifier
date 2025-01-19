@@ -232,22 +232,24 @@
             // Send data to the Flask endpoint using AJAX
             $.ajax({
                 url: 'http://127.0.0.1:5000/predict', // Replace with your Flask endpoint
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(formData), // Send form data as JSON
                 success: function(response) {
-                    // Convert 0 and 1 to 'Ya' and 'Tidak' respectively
-                    const translate = (value) => {
-                        return value === 0 ? 'Ya' : 'Tidak';
-                    };
+                console.log('Response received from backend:', response);  // Debugging
+                const translate = (value) => {
+                    return value === 0 ? 'Ya' : 'Tidak';
+                };
 
-                    // Dynamically display the prediction result below the form
-                    $('#prediction-result').html(`
+                $('#prediction-result').html(`
                     <h3>Prediction Result:</h3>
                     <div class="result-box">
                         <p><strong>Predicted Class:</strong> <span class="result">${translate(response.predicted_class)}</span></p>
                     </div>
-                      <div class="result-box">
+                    <div class="result-box">
                         <h4>Priors:</h4>
                         <pre><code>${JSON.stringify(response.priors, null, 2)}</code></pre>
                     </div>
@@ -259,14 +261,12 @@
                         <h4>Posteriors:</h4>
                         <pre><code>${JSON.stringify(response.posteriors, null, 2)}</code></pre>
                     </div>
-                    
-                  
                 `);
-                },
-                error: function(xhr, status, error) {
-                    // Handle error: Show alert
-                    alert('Terjadi kesalahan dalam pengiriman data: ' + error);
-                }
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX error:', error);  // Debugging
+                alert('Terjadi kesalahan dalam pengiriman data: ' + error);
+            }
             });
         });
     });
