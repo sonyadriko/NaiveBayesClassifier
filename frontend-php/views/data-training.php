@@ -16,7 +16,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
-    <!-- DataTables CSS -->
+    <!-- DataTables CSSx -->
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
 </head>
@@ -132,8 +132,11 @@
     $(document).ready(function() {
         // Fetch data from Flask endpoint
         $.ajax({
-            url: 'http://127.0.0.1:5000/readdata',
+            url: 'http://127.0.0.1:5000/read',
             method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             success: function(response) {
                 if (response.data) {
                     const data = response.data;
