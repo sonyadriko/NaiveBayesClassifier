@@ -65,7 +65,8 @@ Aplikasi backend mendukung beberapa endpoint penting:
 2. /convert: Mengonversi format data yang diunggah menjadi format yang sesuai.
 3. /predict: Melakukan prediksi berdasarkan data yang dimasukkan.
 4. /get_labels: Mendapatkan label data.
-5. /readdata: Membaca data dari database untuk analisis lebih lanjut.
+5. /read: Membaca data dari database untuk analisis lebih lanjut.
+6. /evaluate: Menguji model dengan menggunakan confussion matriks.
 Setiap endpoint berkomunikasi menggunakan JSON dan memberikan respons yang mudah dipahami oleh pengguna maupun pengembang.
 
 ---
