@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div>
         <Topbar />
-        <div className="flex">
+        <div className="flex main-content">
           <div className="flex-1 p-6">
           <Routes>
               {/* Menambahkan routing untuk setiap halaman */}
