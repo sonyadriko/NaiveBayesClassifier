@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 const Topbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [role, setRole] = useState(null); // Menyimpan role pengguna
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -21,7 +22,19 @@ const Topbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // Ambil role pengguna dari localStorage
+    const userRole = localStorage.getItem('role');
+    setRole(userRole); // Set role ke state
+  }, []);
+
   const isActive = (path) => location.pathname === path;
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role'); // Hapus role saat logout
+    window.location.href = '/login'; // Redirect ke halaman login setelah logout
+  };
 
   return (
     <nav
@@ -89,6 +102,22 @@ const Topbar = () => {
               Evaluasi
             </Link>
           </li>
+
+          {/* Menu Manajemen Akun hanya untuk admin */}
+          {role === 'admin' && (
+            <li>
+              <Link
+                to="/account-management"
+                className={`${
+                  isActive('/account-management') ? 'text-indigo-400' : ''
+                } hover:${
+                  isScrolled ? 'text-indigo-600' : 'text-indigo-300'
+                } transition-all`}
+              >
+                Accounts
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* Logout button */}
@@ -98,6 +127,7 @@ const Topbar = () => {
               ? 'bg-gray-100 text-black hover:bg-gray-200'
               : 'bg-gray-700 text-white hover:bg-gray-600'
           }`}
+          onClick={handleLogout}
         >
           Logout
         </button>
@@ -186,6 +216,24 @@ const Topbar = () => {
               Evaluasi
             </Link>
           </li>
+
+          {/* Menu Manajemen Akun hanya untuk admin */}
+          {role === 'admin' && (
+            <li>
+              <Link
+                to="/account-management"
+                className={`block ${
+                  isActive('/account-management') ? 'text-indigo-400' : ''
+                } hover:${
+                  isScrolled ? 'text-indigo-600' : 'text-indigo-300'
+                } transition-all`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Manajemen Akun
+              </Link>
+            </li>
+          )}
+
           <li>
             <button
               className={`w-full text-left px-4 py-2 rounded-md transition-all ${

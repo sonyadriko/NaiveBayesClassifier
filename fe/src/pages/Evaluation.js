@@ -73,7 +73,7 @@ const EvaluationPage = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-green-600 focus:ring-2 focus:ring-teal-500 transition-transform transform hover:scale-105 disabled:bg-green-300"
+                className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 transform transition duration-200 hover:scale-105"
                 disabled={loading}
               >
                 {loading ? "Evaluating..." : "Evaluasi"}

@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from flask import request
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from app.extensions import bcrypt, mysql  # Mengimpor ekstensi dari extensions.py
 
 auth_ns = Namespace('auth', description='Autentikasi dan Login')
@@ -93,3 +93,25 @@ class Register(Resource):
         except Exception as e:
             # Tangani error dan kirimkan pesan error dalam bentuk dictionary
             return {"error": str(e)}, 500
+
+# @auth_ns.route('/logout')
+# class Logout(Resource):
+#     @auth_ns.doc('logout')
+#     @auth_ns.response(200, 'Logout sukses')
+#     @auth_ns.response(401, 'Token tidak valid atau kadaluarsa')
+#     @jwt_required()  # Pastikan pengguna terautentikasi dengan JWT
+#     def post(self):
+#         """Logout dengan mencabut token"""
+#         try:
+#             # Ambil ID pengguna dari token
+#             current_user = get_jwt_identity()
+
+#             # Ambil JTI (JWT ID) dari token untuk blacklist
+#             jti = get_jwt()['jti']
+
+#             # Masukkan JTI ke blacklist (dalam memori atau database)
+#             blacklist.add(jti)
+
+#             return {"message": "Logout sukses"}, 200
+#         except Exception as e:
+#             return {"error": str(e)}, 500
