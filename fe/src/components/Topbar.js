@@ -87,7 +87,7 @@ const Topbar = () => {
                 isScrolled ? 'text-indigo-600' : 'text-indigo-300'
               } transition-all`}
             >
-              Prediksi
+              Prediction
             </Link>
           </li>
           <li>
@@ -99,7 +99,7 @@ const Topbar = () => {
                 isScrolled ? 'text-indigo-600' : 'text-indigo-300'
               } transition-all`}
             >
-              Evaluasi
+              Evaluate
             </Link>
           </li>
 
