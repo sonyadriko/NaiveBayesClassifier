@@ -8,6 +8,7 @@ from app.api.predict import predict_bp
 from app.api.get_labels import get_labels_bp
 from app.api.evaluate import evaluate_ns
 from app.api.auth import auth_ns
+from app.api.rud_user import user_ns
 from flask_jwt_extended import JWTManager
 from app.extensions import init_extensions  # Impor init_extensions
 
@@ -39,5 +40,6 @@ def create_app():
     api.add_namespace(get_labels_bp, path='/get_labels')
     api.add_namespace(evaluate_ns, path='/evaluate')
     api.add_namespace(auth_ns, path='/auth')
+    api.add_namespace(user_ns, path='/users')
 
     return app

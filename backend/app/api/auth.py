@@ -41,7 +41,7 @@ class Login(Resource):
         user = cursor.fetchone()
 
         if user and bcrypt.check_password_hash(user[3], password):  # user[2] adalah password
-            access_token = create_access_token(identity=user[0])  # user[0] adalah ID
+            access_token = create_access_token(identity=str(user[0]))  # user[0] adalah ID
             return {
                 'access_token': access_token,
                 'role': user[4]  # Role ada di index 3
