@@ -1,6 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from flask import request
 from app.services.file_processor import process_file
+import pandas as pd
 
 # Define the Namespace for upload
 ns = Namespace('upload', description='Upload file untuk diproses')
@@ -26,6 +27,11 @@ class UploadFile(Resource):
 
         if file and (file.filename.endswith('.xls') or file.filename.endswith('.xlsx')):
             try:
+                data = pd.read_excel(file)
+                
+                upload_path = 'data.xlsx'
+                data.to_excel(upload_path, index=False, sheet_name='Sheet1')
+                
                 upload_path = process_file(file)
                 return {"message": f"File berhasil diproses dan disimpan di {upload_path}"}, 200
             except Exception as e:
