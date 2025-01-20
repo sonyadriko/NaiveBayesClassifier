@@ -62,13 +62,8 @@ Buka browser Anda dan akses: http://localhost:5000
 
 # 🌐 **Endpoint Backend**
 Aplikasi backend mendukung beberapa endpoint penting:
-1. /upload: Mengunggah data siswa untuk diproses.
-2. /convert: Mengonversi format data yang diunggah menjadi format yang sesuai.
-3. /predict: Melakukan prediksi berdasarkan data yang dimasukkan.
-4. /get_labels: Mendapatkan label data.
-5. /read: Membaca data dari database untuk analisis lebih lanjut.
-6. /evaluate: Menguji model dengan menggunakan confussion matriks.
-Setiap endpoint berkomunikasi menggunakan JSON dan memberikan respons yang mudah dipahami oleh pengguna maupun pengembang.
+![image](https://github.com/user-attachments/assets/20a998f0-6f87-474b-8833-3c52872f25ff)
+
 
 ---
 
