@@ -14,7 +14,7 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 
 # 🛠️ **Teknologi yang Digunakan**
 - Backend: Flask, Swagger (Python) 📝
-- Frontend: HTML, CSS, Bootstrap 🌐
+- Frontend: React JS 🌐
 - Komunikasi API: JSON 🔐
 
 ---
@@ -31,9 +31,10 @@ Selamat datang di repositori proyek Analisis Menentukan Pola Kelulusan Siswa SMK
 2. Hasil Prediksi
 Hasil prediksi mencakup:
   - ✅ Predicted Class: Menunjukkan apakah hasilnya "Ya" atau "Tidak."
-  - ⚛ Posteriors: Probabilitas akhir untuk setiap kelas.
-  - 🔢 Likelihoods: Probabilitas atribut untuk setiap kelas.
   - 🔐 Priors: Probabilitas awal dari setiap kelas.
+  - 🔢 Likelihoods: Probabilitas atribut untuk setiap kelas.
+  - ⚛ Posteriors: Probabilitas akhir untuk setiap kelas.
+  
 ---
 # 📒 **Instalasi dan Penggunaan**
 - Langkah 1: Clone Repositori
