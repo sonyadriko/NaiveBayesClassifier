@@ -7,6 +7,7 @@ import Prediction from './pages/Prediction';
 import Evaluation from './pages/Evaluation';
 import LoginPage from './pages/LoginPage';
 import AccountManagementPage from './pages/AccountManagementPage';
+import AddUserPage from './pages/AddUserPage';
 import './index.css';
 
 function App() {
@@ -105,6 +106,23 @@ function App() {
                   <div className="flex main-content">
                     <div className="flex-1 p-6">
                       <AccountManagementPage />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/add-user"
+            element={
+              isAuthenticated() ? (
+                <>
+                  <Topbar />
+                  <div className="flex main-content">
+                    <div className="flex-1 p-6">
+                      <AddUserPage  />
                     </div>
                   </div>
                 </>
