@@ -1,109 +1,132 @@
 import React, { useState, useEffect } from 'react';
+import { FaEdit, FaTrash, FaPlus, FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const AccountManagementPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Cek role pengguna
-  useEffect(() => {
-    const role = localStorage.getItem('role');
-    if (role !== 'admin') {
-      navigate('/'); // Redirect ke halaman utama jika bukan admin
-    }
-  }, [navigate]);
+  // Fetch all users
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://127.0.0.1:5000/users/', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  // Ambil data pengguna (misalnya, dari API)
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:5000/api/users', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
+      if (response.ok) {
         const data = await response.json();
-        if (response.ok) {
-          setUsers(data.users);
-        } else {
-          console.error('Failed to fetch users');
-        }
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      } finally {
-        setLoading(false);
+        setUsers(data);
+      } else {
+        throw new Error('Failed to fetch users');
       }
-    };
-
-    fetchUsers();
-  }, []);
-
-  const handleDelete = async (userId) => {
-    if (window.confirm('Are you sure you want to delete this user?')) {
-      try {
-        const response = await fetch(`http://127.0.0.1:5000/api/users/${userId}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-
-        if (response.ok) {
-          setUsers(users.filter(user => user.id !== userId));
-        } else {
-          alert('Failed to delete user');
-        }
-      } catch (error) {
-        console.error('Error deleting user:', error);
-      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="container mx-auto p-6 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-6">Account Management</h1>
-      <button
-        className="bg-green-500 text-white px-4 py-2 rounded-md mb-4"
-        onClick={() => navigate('/add-user')}
-        >
-        Add New User
-        </button>
+  // Delete a user
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this user?')) return;
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://127.0.0.1:5000/users/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      {/* Loader when data is being fetched */}
+      if (response.ok) {
+        alert('User deleted successfully');
+        setUsers(users.filter((user) => user.id !== id));
+      } else {
+        throw new Error('Failed to delete user');
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  // Navigate to Add User page
+  const handleAddUser = () => {
+    navigate('/add-user');
+  };
+
+  // Navigate to Edit User page
+  const handleEditUser = (id) => {
+    navigate(`/edit-user/${id}`);
+  };
+
+  // View User details
+  const handleViewUser = (id) => {
+    navigate(`/view-user/${id}`);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  return (
+    <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-semibold mb-6 text-center text-gray-800">Account Management</h1>
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold text-gray-700">User List</h2>
+        <button
+          onClick={handleAddUser}
+          className="flex items-center px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow hover:bg-indigo-700"
+        >
+          <FaPlus className="mr-2" /> Add User
+        </button>
+      </div>
+
       {loading ? (
-        <div className="text-center">Loading...</div>
+        <p className="text-center">Loading users...</p>
       ) : (
-        <table className="min-w-full table-auto border-collapse">
-          <thead>
+        <table className="w-full border-collapse border border-gray-300">
+          <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-2 border-b">ID</th>
-              <th className="px-4 py-2 border-b">Name</th>
-              <th className="px-4 py-2 border-b">Email</th>
-              <th className="px-4 py-2 border-b">Role</th>
-              <th className="px-4 py-2 border-b">Actions</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Name</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Email</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Role</th>
+              <th className="border border-gray-300 px-4 py-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td className="px-4 py-2 border-b">{user.id}</td>
-                <td className="px-4 py-2 border-b">{user.name}</td>
-                <td className="px-4 py-2 border-b">{user.email}</td>
-                <td className="px-4 py-2 border-b">{user.role}</td>
-                <td className="px-4 py-2 border-b">
+            {users.map((user) => (
+              <tr key={user.id} className="hover:bg-gray-50">
+                <td className="border border-gray-300 px-4 py-2">{user.name}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.email}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.role}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
-                    onClick={() => navigate(`/edit-user/${user.id}`)}
+                    onClick={() => handleViewUser(user.id)}
+                    className="text-blue-500 hover:underline mr-4"
                   >
-                    Edit
+                    <FaEye />
                   </button>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-md"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleEditUser(user.id)}
+                    className="text-green-500 hover:underline mr-4"
                   >
-                    Delete
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(user.id)}
+                    className="text-red-500 hover:underline"
+                  >
+                    <FaTrash />
                   </button>
                 </td>
               </tr>

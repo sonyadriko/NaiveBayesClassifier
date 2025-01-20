@@ -28,7 +28,7 @@ class UserList(Resource):
                     'id': user[0],
                     'name': user[1],
                     'email': user[2],
-                    'role': user[3]
+                    'role': user[4]
                 })
 
             return result, 200
@@ -55,7 +55,7 @@ class User(Resource):
                     'id': user[0],
                     'name': user[1],
                     'email': user[2],
-                    'role': user[3]
+                    'role': user[4]
                 }, 200
             else:
                 return {"error": "User not found"}, 404
@@ -94,7 +94,7 @@ class User(Resource):
                     'id': user[0],
                     'name': user[1],
                     'email': user[2],
-                    'role': user[3]
+                    'role': user[4]
                 }, 200
             else:
                 return {"error": "User not found"}, 404

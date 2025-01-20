@@ -8,6 +8,8 @@ import Evaluation from './pages/Evaluation';
 import LoginPage from './pages/LoginPage';
 import AccountManagementPage from './pages/AccountManagementPage';
 import AddUserPage from './pages/AddUserPage';
+import EditUserPage from './pages/EditUserPage';
+import ViewUserPage from './pages/ViewUserPage';
 import './index.css';
 
 function App() {
@@ -123,6 +125,40 @@ function App() {
                   <div className="flex main-content">
                     <div className="flex-1 p-6">
                       <AddUserPage  />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/edit-user/:id"
+            element={
+              isAuthenticated() ? (
+                <>
+                  <Topbar />
+                  <div className="flex main-content">
+                    <div className="flex-1 p-6">
+                      <EditUserPage  />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/view-user/:id"
+            element={
+              isAuthenticated() ? (
+                <>
+                  <Topbar />
+                  <div className="flex main-content">
+                    <div className="flex-1 p-6">
+                      <ViewUserPage  />
                     </div>
                   </div>
                 </>
