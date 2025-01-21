@@ -16,6 +16,7 @@ def process_file(file):
             le = LabelEncoder()
             data[column] = le.fit_transform(data[column])
             label_encoders[column] = le
+            print(f"Mapping untuk kolom {column}: {dict(zip(le.classes_, le.transform(le.classes_)))}")
 
     # Menyimpan data yang diproses ke file baru
     processed_file_path = 'proses_data.xlsx'

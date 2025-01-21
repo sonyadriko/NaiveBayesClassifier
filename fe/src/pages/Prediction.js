@@ -3,13 +3,13 @@ import 'animate.css';
 
 const PredictionPage = () => {
   const [formData, setFormData] = useState({
-    jenisKelamin: '0',
-    organisasi: '0',
-    ekstrakurikuler: '0',
-    sertifikasiProfesi: '0',
-    nilaiAkhir: '0',
-    tempatMagang: '0',
-    tempatKerja: '0'
+    jenisKelamin: 'Laki-laki',
+    organisasi: 'PMR',
+    ekstrakurikuler: 'Bahasa',
+    sertifikasiProfesi: 'Kompeten',
+    nilaiAkhir: 'Baik',
+    tempatMagang: 'ISP',
+    tempatKerja: 'ISP'
   });
 
   const [predictionResult, setPredictionResult] = useState(null);

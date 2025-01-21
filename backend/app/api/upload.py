@@ -38,5 +38,3 @@ class UploadFile(Resource):
                 return {"message": str(e)}, 400
         else:
             return {"message": "Format file tidak valid. Hanya mendukung .xls dan .xlsx"}, 400
-
-# Here we have just the namespace definition, no Blueprint registration

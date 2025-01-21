@@ -1,0 +1,162 @@
+2025-01-21 12:09:57 - app.api.predict - DEBUG - ====== Starting the prediction process ======
+2025-01-21 12:09:57 - app.api.predict - INFO - Data successfully read from 'data.xlsx'.
+2025-01-21 12:09:57 - app.api.predict - INFO - Data shapes - Features: (10, 7), Target: (10,)
+2025-01-21 12:09:57 - app.api.predict - INFO - Naive Bayes model trained successfully.
+2025-01-21 12:09:57 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': '0', 'organisasi': '0', 'ekstrakurikuler': '0', 'sertifikasiProfesi': '0', 'nilaiAkhir': '0', 'tempatMagang': '0', 'tempatKerja': '0'}
+2025-01-21 12:09:57 - app.api.predict - INFO - Prediction complete. Predicted class: < 3 Bulan
+2025-01-21 12:09:57 - app.api.predict - DEBUG - Class priors: {'< 3 Bulan': np.float64(0.5), '> 3 Bulan': np.float64(0.5)}
+2025-01-21 12:09:57 - app.api.predict - INFO - Logs successfully exported to app_logs.pdf
+2025-01-21 12:09:57 - app.api.predict - INFO - Prediction response successfully created.
+2025-01-21 12:45:10 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PRAMUKA', 'ekstrakurikuler': 'Kesenian', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'ISP', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 12:45:10 - app.api.predict - ERROR - Error during prediction: [Errno 2] No such file or directory: 'encoders.pkl'
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 146, in post
+    encoders = load_encoders()
+               ^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 51, in load_encoders
+    with open(filepath, 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'encoders.pkl'
+2025-01-21 12:45:28 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PMR', 'ekstrakurikuler': 'Kesenian', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'Perhotelan', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 12:45:28 - app.api.predict - ERROR - Error during prediction: [Errno 2] No such file or directory: 'encoders.pkl'
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 146, in post
+    encoders = load_encoders()
+               ^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 51, in load_encoders
+    with open(filepath, 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'encoders.pkl'
+2025-01-21 12:46:08 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': '0', 'organisasi': '0', 'ekstrakurikuler': '0', 'sertifikasiProfesi': '0', 'nilaiAkhir': '0', 'tempatMagang': '0', 'tempatKerja': '0'}
+2025-01-21 12:46:08 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 12:46:08 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi nilaiAkhir tempatMagang tempatKerja
+0            0          0               0                  0          0            0           0
+2025-01-21 12:46:08 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 161, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 12:46:31 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PMR', 'ekstrakurikuler': 'Olahraga', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'ISP', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 12:46:31 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 12:46:31 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi   nilaiAkhir tempatMagang   tempatKerja
+0    Perempuan        PMR        Olahraga     Tidak Kompeten  Sangat Baik          ISP  Ekspor-Impor
+2025-01-21 12:46:31 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 161, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 13:10:59 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PMR', 'ekstrakurikuler': 'Olahraga', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'ISP', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 13:10:59 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 13:10:59 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi   nilaiAkhir tempatMagang   tempatKerja
+0    Perempuan        PMR        Olahraga     Tidak Kompeten  Sangat Baik          ISP  Ekspor-Impor
+2025-01-21 13:10:59 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 161, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 13:12:44 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': '0', 'ekstrakurikuler': '0', 'sertifikasiProfesi': '0', 'nilaiAkhir': '0', 'tempatMagang': '0', 'tempatKerja': '0'}
+2025-01-21 13:12:44 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 13:12:44 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi nilaiAkhir tempatMagang tempatKerja
+0    Perempuan          0               0                  0          0            0           0
+2025-01-21 13:12:44 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 216, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 13:13:00 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PRAMUKA', 'ekstrakurikuler': 'Kesenian', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'ISP', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 13:13:00 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 13:13:00 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi   nilaiAkhir tempatMagang   tempatKerja
+0    Perempuan    PRAMUKA        Kesenian     Tidak Kompeten  Sangat Baik          ISP  Ekspor-Impor
+2025-01-21 13:13:00 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 216, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 13:13:52 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': 'Perempuan', 'organisasi': 'PRAMUKA', 'ekstrakurikuler': 'Kesenian', 'sertifikasiProfesi': 'Tidak Kompeten', 'nilaiAkhir': 'Sangat Baik', 'tempatMagang': 'ISP', 'tempatKerja': 'Ekspor-Impor'}
+2025-01-21 13:13:52 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 13:13:52 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi   nilaiAkhir tempatMagang   tempatKerja
+0    Perempuan    PRAMUKA        Kesenian     Tidak Kompeten  Sangat Baik          ISP  Ekspor-Impor
+2025-01-21 13:13:52 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 227, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable
+2025-01-21 13:55:53 - app.api.predict - DEBUG - Received input data: {'jenisKelamin': '0', 'organisasi': '0', 'ekstrakurikuler': '0', 'sertifikasiProfesi': '0', 'nilaiAkhir': '0', 'tempatMagang': '0', 'tempatKerja': '0'}
+2025-01-21 13:55:53 - app.api.predict - DEBUG - Label encoders loaded successfully.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'jenisKelamin' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'organisasi' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'ekstrakurikuler' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'sertifikasiProfesi' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'nilaiAkhir' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'tempatMagang' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - WARNING - Column 'tempatKerja' not found in encoders. Skipping transformation.
+2025-01-21 13:55:53 - app.api.predict - DEBUG - Transformed input data:   jenisKelamin organisasi ekstrakurikuler sertifikasiProfesi nilaiAkhir tempatMagang tempatKerja
+0            0          0               0                  0          0            0           0
+2025-01-21 13:55:53 - app.api.predict - ERROR - Error during prediction: 'NoneType' object is not iterable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\naivebayes2\backend\app\api\predict.py", line 227, in post
+    predicted_class, posteriors, likelihood_details = nb.predict(input_df)
+                                                      ^^^^^^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\naivebayes2\backend\app\models\naive_bayes_classifier.py", line 37, in predict
+    for cls in self.classes:
+TypeError: 'NoneType' object is not iterable

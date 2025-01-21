@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 class NaiveBayesClassifier:
     def __init__(self):
@@ -11,10 +12,14 @@ class NaiveBayesClassifier:
         self.classes = np.unique(y)
         total_samples = len(y)
 
+        print("Training Naive Bayes Classifier...")
+        print(f"Total samples: {total_samples}")
+        
         # Hitung prior probabilities P(C)
         for cls in self.classes:
             cls_count = (y == cls).sum()
             self.class_probs[cls] = cls_count / total_samples
+            print(f"Prior P({cls}) = {self.class_probs[cls]}")
 
         # Hitung likelihoods P(X|C) untuk setiap fitur
         for cls in self.classes:
@@ -26,33 +31,46 @@ class NaiveBayesClassifier:
                 for value in feature_values:
                     likelihood = (class_data[column] == value).sum() / len(class_data)
                     feature_likelihoods[column][value] = likelihood
+                    print(f"P({value}|{cls}) = {likelihood} (for feature {column})")
             self.likelihoods[cls] = feature_likelihoods
 
     def predict(self, features):
+        """Memprediksi kelas untuk satu set fitur."""
+        print("\nPredicting class for given features...")
         posteriors = {}
         likelihood_details = {}
         
         for cls in self.classes:
-            prior = self.class_probs.get(cls, 0)  # Prior untuk kelas
+            prior = self.class_probs.get(cls, 0)  # Probabilitas prior P(C)
             likelihood = 1
             feature_likelihoods = {}
 
-            # Menghitung likelihood untuk setiap fitur
+            print(f"\nClass {cls}:")
+            print(f"Prior P({cls}) = {prior}")
+            
+            # Hitung likelihood P(X|C)
             for feature, value in features.items():
                 if feature in self.likelihoods[cls] and value in self.likelihoods[cls][feature]:
                     likelihood_value = self.likelihoods[cls][feature][value]
-                    feature_likelihoods[feature] = likelihood_value
-                    likelihood *= likelihood_value
+                    print(f"Likelihood P({value}|{cls}) = {likelihood_value}")
                 else:
                     likelihood_value = 1e-6  # Jika nilai tidak ditemukan, gunakan probabilitas kecil
-                    feature_likelihoods[feature] = likelihood_value
-                    likelihood *= likelihood_value
+                    print(f"Likelihood P({value}|{cls}) = {likelihood_value} (using small probability for unknown value)")
+                feature_likelihoods[feature] = likelihood_value
+                likelihood *= likelihood_value
 
-            # Menghitung posterior tanpa normalisasi
+            # Hitung posterior tanpa normalisasi
             posteriors[cls] = prior * likelihood
             likelihood_details[cls] = feature_likelihoods
-        
-        # Menentukan kelas yang diprediksi
-        predicted_class = max(posteriors, key=posteriors.get)
+            print(f"Posterior (without normalization) for class {cls} = {posteriors[cls]}")
 
-        return predicted_class, posteriors, likelihood_details
+        # Normalisasi posterior untuk mendapatkan probabilitas posterior
+        evidence = sum(posteriors.values())
+        normalized_posteriors = {cls: posterior / evidence for cls, posterior in posteriors.items()}
+
+        # Prediksi kelas dengan probabilitas posterior tertinggi
+        predicted_class = max(normalized_posteriors, key=normalized_posteriors.get)
+        print(f"Normalized posteriors: {normalized_posteriors}")
+        print(f"Predicted class: {predicted_class}")
+
+        return predicted_class, normalized_posteriors, likelihood_details

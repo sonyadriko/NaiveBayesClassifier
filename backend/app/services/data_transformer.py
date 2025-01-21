@@ -1,7 +1,7 @@
 import numpy as np
-# from app.services.file_processor import label_encoders
+from app.services.file_processor import label_encoders
 
-label_encoders = {}
+# label_encoders = {}
 
 def convert_data(input_data):
     """Mengonversi data kategori menggunakan LabelEncoder."""

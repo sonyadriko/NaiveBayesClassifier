@@ -25,5 +25,3 @@ class ConvertData(Resource):
             return {"converted_data": converted_data}, 200
         except Exception as e:
             return {"error": str(e)}, 400
-
-# Export the namespace so it can be imported and registered in app/__init__.py
