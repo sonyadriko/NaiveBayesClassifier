@@ -6,7 +6,21 @@ label_encoders = {}
 def process_file(file):
     """Mengunggah dan memproses file Excel."""
     # Membaca file Excel
-    data = pd.read_excel(file)
+    data = pd.read_excel(file, header=0)
+    
+     # Header baru yang diinginkan
+    new_headers = [
+        'jenisKelamin', 'organisasi', 'ekstrakurikuler', 
+        'sertifikasiProfesi', 'nilaiAkhir', 'tempatMagang', 
+        'tempatKerja', 'Durasi Mendapat Kerja'
+    ]
+
+    # Pastikan jumlah header baru sesuai dengan jumlah kolom di data
+    if len(new_headers) != len(data.columns):
+        raise ValueError("Jumlah kolom di file tidak sesuai dengan header yang diharapkan.")
+
+    # Ganti nama kolom
+    data.columns = new_headers
 
     # Label encoding untuk kolom kategori
     global label_encoders

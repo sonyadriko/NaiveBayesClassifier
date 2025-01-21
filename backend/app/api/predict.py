@@ -73,6 +73,8 @@ class Predict(Resource):
             posteriors = convert_to_serializable(posteriors)
             likelihood_details = convert_to_serializable(likelihood_details)
             priors = convert_to_serializable(priors)
+            
+            print(posteriors)
 
 
             # Kembalikan response JSON dengan hasil prediksi dan detail model

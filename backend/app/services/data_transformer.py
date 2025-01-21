@@ -14,14 +14,18 @@ def convert_data(input_data):
     return convert_to_serializable(converted_data)
 
 def convert_to_serializable(data):
-    """Konversi objek data ke tipe yang bisa diserialisasi oleh JSON (int, float, str, bool, None)."""
+    """Konversi objek data ke tipe yang bisa diserialisasi oleh JSON (int, float, str, bool, None) 
+    dan membatasi angka desimal menjadi maksimal 4 angka di belakang koma."""
     if isinstance(data, dict):
         return {str(key): convert_to_serializable(value) for key, value in data.items()}
     elif isinstance(data, list):
         return [convert_to_serializable(item) for item in data]
     elif isinstance(data, np.ndarray):
         return data.tolist()
-    elif isinstance(data, (np.int64, np.float64)):
-        return int(data) if isinstance(data, np.int64) else float(data)
+    elif isinstance(data, (np.int64, np.int32)):
+        return int(data)
+    elif isinstance(data, (np.float64, np.float32, float)):
+        # Batasi float hingga 4 angka di belakang koma
+        return round(float(data), 4)
     else:
-        return data 
+        return data

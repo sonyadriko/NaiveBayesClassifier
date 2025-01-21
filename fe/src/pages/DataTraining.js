@@ -13,16 +13,21 @@ const DataTraining = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/read'); // Memanggil API
+        const response = await fetch('http://127.0.0.1:5000/read', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        setData(result.data || []); // Simpan data ke state
+        setData(result.data || []); 
       } catch (err) {
-        setError(err.message); // Simpan error ke state
+        setError(err.message);
       } finally {
-        setLoading(false); // Set loading selesai
+        setLoading(false); 
       }
     };
 

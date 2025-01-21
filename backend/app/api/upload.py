@@ -27,7 +27,21 @@ class UploadFile(Resource):
 
         if file and (file.filename.endswith('.xls') or file.filename.endswith('.xlsx')):
             try:
-                data = pd.read_excel(file)
+                data = pd.read_excel(file, header=0)
+                
+               # Header baru yang diinginkan
+                new_headers = [
+                    'jenisKelamin', 'organisasi', 'ekstrakurikuler', 
+                    'sertifikasiProfesi', 'nilaiAkhir', 'tempatMagang', 
+                    'tempatKerja', 'Durasi Mendapat Kerja'
+                ]
+
+                # Pastikan jumlah header baru sesuai dengan jumlah kolom di data
+                if len(new_headers) != len(data.columns):
+                    raise ValueError("Jumlah kolom di file tidak sesuai dengan header yang diharapkan.")
+
+                # Ganti nama kolom
+                data.columns = new_headers
                 
                 upload_path = 'data.xlsx'
                 data.to_excel(upload_path, index=False, sheet_name='Sheet1')
