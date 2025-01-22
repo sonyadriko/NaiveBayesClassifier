@@ -75,37 +75,37 @@ const DataTraining = () => {
   const columns = [
     {
       name: 'Jenis Kelamin',
-      selector: row => row["Jenis Kelamin"],
+      selector: row => row["jenisKelamin"],
       sortable: true,
     },
     {
       name: 'Organisasi',
-      selector: row => row.Organisasi,
+      selector: row => row.organisasi,
       sortable: true,
     },
     {
       name: 'Ekstrakurikuler',
-      selector: row => row.Ekstrakurikuler,
+      selector: row => row.ekstrakurikuler,
       sortable: true,
     },
     {
       name: 'Sertifikasi Profesi',
-      selector: row => row["Sertifikasi Profesi"],
+      selector: row => row["sertifikasiProfesi"],
       sortable: true,
     },
     {
       name: 'Nilai Akhir',
-      selector: row => row["Nilai Akhir"],
+      selector: row => row["nilaiAkhir"],
       sortable: true,
     },
     {
       name: 'Tempat Magang',
-      selector: row => row["Tempat Magang"],
+      selector: row => row["tempatMagang"],
       sortable: true,
     },
     {
       name: 'Tempat Kerja',
-      selector: row => row["Tempat Kerja"],
+      selector: row => row["tempatKerja"],
       sortable: true,
     },
     {
