@@ -1,5 +1,5 @@
 apps_logs.pdf
-app.apps_logs
+app.app.log
 encoders.pkl
 app/__pycache__
 app/api/__pycache__
