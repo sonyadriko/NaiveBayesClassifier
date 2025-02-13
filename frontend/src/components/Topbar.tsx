@@ -104,7 +104,7 @@ const Topbar: React.FC = () => {
           </li>
 
           {/* Menu Manajemen Akun hanya untuk admin */}
-          {role === 'admin' && (
+          {/*role === 'admin' && (
             <li>
               <Link
                 to="/account-management"
@@ -117,7 +117,7 @@ const Topbar: React.FC = () => {
                 Accounts
               </Link>
             </li>
-          )}
+          )*/}
         </ul>
 
         {/* Logout button */}
