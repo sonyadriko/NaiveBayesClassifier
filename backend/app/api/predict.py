@@ -57,7 +57,8 @@ class Predict(Resource):
 
             # Prediksi menggunakan model Naive Bayes
             try:
-                predicted_class, posteriors, likelihood_details = nb.predict(input_data)
+                # predicted_class, posteriors, likelihood_details = nb.predict(input_data)
+                predicted_class, posteriors, likelihood_details, evidence = nb.predict(input_data)
                 logger.debug(f"Prediction result - predicted_class: {predicted_class}")
             
             except Exception as e:
@@ -73,6 +74,8 @@ class Predict(Resource):
             posteriors = convert_to_serializable(posteriors)
             likelihood_details = convert_to_serializable(likelihood_details)
             priors = convert_to_serializable(priors)
+            evidence = convert_to_serializable(evidence)
+        
             
             print(posteriors)
 
@@ -82,7 +85,8 @@ class Predict(Resource):
                 "predicted_class": predicted_class,
                 "posteriors": posteriors,
                 "likelihoods": likelihood_details,
-                "priors": priors 
+                "priors": priors,
+                "evidence": evidence 
             }
             logger.debug("Returning response with prediction results.")
             return response, 200

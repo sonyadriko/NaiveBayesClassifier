@@ -73,4 +73,4 @@ class NaiveBayesClassifier:
         print(f"Normalized posteriors: {normalized_posteriors}")
         print(f"Predicted class: {predicted_class}")
 
-        return predicted_class, normalized_posteriors, likelihood_details
+        return predicted_class, normalized_posteriors, likelihood_details, evidence

@@ -16,6 +16,7 @@ interface PredictionResult {
   priors: Record<string, number>;
   likelihoods: Record<string, number>;
   posteriors: Record<string, number>;
+  evidence: Record<string, number>;
 }
 
 const PredictionPage: React.FC = () => {
@@ -71,6 +72,7 @@ const PredictionPage: React.FC = () => {
         priors: data.priors,
         likelihoods: data.likelihoods,
         posteriors: data.posteriors,
+        evidence: data.evidence,
       });
     } catch (error) {
       console.error('Error:', error);
