@@ -22,7 +22,7 @@ const App: React.FC = () => {
           {/* Route untuk halaman login */}
           <Route path="/login" element={<LoginPage />} />
 
-          {/* Halaman yang membutuhkan autentikasi */}
+          {/* Halaman utama yang membutuhkan login */}
           <Route
             path="/"
             element={
@@ -41,15 +41,40 @@ const App: React.FC = () => {
             }
           />
 
-          {/* Route lainnya dengan proteksi autentikasi */}
+          {/* Route Prediction - Bisa diakses tanpa login */}
+          <Route
+            path="/prediction"
+            element={
+              <>
+                <Topbar />
+                <div className="flex main-content">
+                  <div className="flex-1 p-6">
+                    <Prediction />
+                  </div>
+                </div>
+              </>
+            }
+          />
+
+<Route
+  path="/evaluation"
+  element={
+    <>
+      <Topbar />
+      <div className="flex main-content">
+        <div className="flex-1 p-6">
+          <Evaluation />
+        </div>
+      </div>
+    </>
+  }
+/>
+
+
+          {/* Route lain yang butuh login */}
           {[
             { path: "/data-training", element: <DataTraining /> },
-            { path: "/prediction", element: <Prediction /> },
-            { path: "/evaluation", element: <Evaluation /> },
-            // { path: "/account-management", element: <AccountManagementPage /> },
-            // { path: "/add-user", element: <AddUserPage /> },
-            // { path: "/edit-user/:id", element: <EditUserPage /> },
-            // { path: "/view-user/:id", element: <ViewUserPage /> },
+            // { path: "/evaluation", element: <Evaluation /> },
           ].map(({ path, element }) => (
             <Route
               key={path}

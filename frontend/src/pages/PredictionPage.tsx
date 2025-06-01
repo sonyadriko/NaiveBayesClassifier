@@ -14,7 +14,7 @@ interface FormData {
 interface PredictionResult {
   predictedClass: string;
   priors: Record<string, number>;
-  likelihoods: Record<string, number>;
+  likelihoods: Record<string, Record<string, number>>;
   posteriors: Record<string, number>;
   evidence: Record<string, number>;
 }
@@ -59,13 +59,17 @@ const PredictionPage: React.FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        
       });
+      
 
       if (!response.ok) {
         throw new Error('Failed to fetch prediction.');
       }
 
       const data = await response.json();
+console.log(data); // Tambahkan ini untuk debug
+
 
       setPredictionResult({
         predictedClass: data.posteriors['< 3 Bulan'] > data.posteriors['> 3 Bulan'] ? 'Ya' : 'Tidak',
@@ -90,7 +94,6 @@ const PredictionPage: React.FC = () => {
             className="bg-white p-8 rounded-lg shadow-lg space-y-6 animate__animated animate__fadeIn"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Fields */}
               {[
                 { name: 'jenisKelamin', label: 'Jenis Kelamin', options: ['Laki-laki', 'Perempuan'] },
                 { name: 'organisasi', label: 'Organisasi', options: ['OSIS', 'PMR', 'PRAMUKA'] },
@@ -147,11 +150,55 @@ const PredictionPage: React.FC = () => {
                     {predictionResult.predictedClass}
                   </span>
                 </div>
-                <div className="bg-white p-6 rounded-md shadow-md">
-                  <h4 className="font-semibold text-lg text-gray-700 mb-2">Details:</h4>
-                  <pre className="text-sm text-gray-600 whitespace-pre-wrap">
-                    {JSON.stringify(predictionResult, null, 2)}
-                  </pre>
+                <div className="bg-white p-6 rounded-md shadow-md text-sm text-gray-700 space-y-4">
+                  <div>
+                    <strong>Priors:</strong>
+                    <ul className="list-disc pl-5">
+                      {Object.entries(predictionResult.priors).map(([key, val]) => (
+                        <li key={key}>
+                          {key}: {typeof val === 'number' ? val.toFixed(4) : val}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Likelihoods:</strong>
+                    <ul className="pl-5">
+                      {Object.entries(predictionResult.likelihoods).map(([classLabel, attributes]) => (
+                        <li key={classLabel}>
+                          <strong>{classLabel}:</strong>
+                          <ul className="list-circle pl-4">
+                            {Object.entries(attributes).map(([attr, val]) => (
+                              <li key={attr}>
+                                {attr}: {typeof val === 'number' ? val.toFixed(4) : val}
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Posteriors:</strong>
+                    <ul className="list-disc pl-5">
+                      {Object.entries(predictionResult.posteriors).map(([key, val]) => (
+                        <li key={key}>
+                          {key}: {typeof val === 'number' ? val.toFixed(4) : val}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Evidence:</strong>
+                    <p className="pl-5">
+    {typeof predictionResult.evidence === 'number'
+      ? Number(predictionResult.evidence).toFixed(4)
+      : '-'}
+  </p>
+                  </div>
                 </div>
               </div>
             </div>
