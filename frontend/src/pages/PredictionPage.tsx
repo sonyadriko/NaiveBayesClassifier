@@ -140,69 +140,120 @@ console.log(data); // Tambahkan ini untuk debug
             </div>
           </form>
 
+          {/* --- MULAI KODE BARU --- */}
           {predictionResult && (
-            <div className="mt-8 p-6 bg-gray-100 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-gray-800 mb-6">Prediction Result:</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-md shadow-md flex flex-col items-center justify-center">
-                  <strong className="text-lg text-gray-700 mb-2">Predicted Class:</strong>
-                  <span className="text-2xl font-bold text-indigo-600">
-                    {predictionResult.predictedClass}
-                  </span>
-                </div>
-                <div className="bg-white p-6 rounded-md shadow-md text-sm text-gray-700 space-y-4">
-                  <div>
-                    <strong>Priors:</strong>
-                    <ul className="list-disc pl-5">
-                      {Object.entries(predictionResult.priors).map(([key, val]) => (
-                        <li key={key}>
-                          {key}: {typeof val === 'number' ? val.toFixed(4) : val}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            <div className="mt-8 p-6 bg-gray-100 rounded-lg shadow-lg animate__animated animate__fadeInUp">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Hasil Perhitungan Naive Bayes</h3>
+              
+              {/* Hasil Utama: Predicted Class dan Evidence */}
+              {/* --- GANTI BLOK DIV INI --- */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+    <strong className="text-lg text-gray-700 mb-2">Prediksi Masa Tunggu</strong>
+    <span className="text-2xl font-bold text-indigo-600">
+      {predictionResult.posteriors['< 3 Bulan'] > predictionResult.posteriors['> 3 Bulan']
+        ? '< 3 Bulan'
+        : '> 3 Bulan'}
+    </span>
+  </div>
+  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center justify-center">
+    <strong className="text-lg text-gray-700 mb-2">Nilai Evidence (P(X))</strong>
+    <span className="text-2xl font-bold text-indigo-600">
+      {typeof predictionResult.evidence === 'number'
+        // Diubah menjadi persen dengan 6 angka desimal
+        ? `${(predictionResult.evidence * 100).toFixed(2)}%`
+        : '-'}
+    </span>
+  </div>
+</div>
 
-                  <div>
-                    <strong>Likelihoods:</strong>
-                    <ul className="pl-5">
-                      {Object.entries(predictionResult.likelihoods).map(([classLabel, attributes]) => (
-                        <li key={classLabel}>
-                          <strong>{classLabel}:</strong>
-                          <ul className="list-circle pl-4">
-                            {Object.entries(attributes).map(([attr, val]) => (
-                              <li key={attr}>
-                                {attr}: {typeof val === 'number' ? val.toFixed(4) : val}
-                              </li>
+              {/* Container untuk tabel-tabel */}
+              <div className="space-y-8">
+                
+               {/* --- MULAI KODE BARU --- */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {/* Tabel Prior (sudah dalam persen) */}
+  <div>
+    <h4 className="font-semibold text-lg mb-2 text-gray-700">Tabel Prior</h4>
+    <div className="overflow-x-auto bg-white rounded-lg shadow">
+      <table className="min-w-full text-sm text-left text-gray-800">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="p-3">Kelas</th>
+            <th className="p-3">Nilai Prior</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(predictionResult.priors).map(([key, val]) => (
+            <tr key={key} className="border-b border-gray-200 hover:bg-gray-50">
+              <td className="p-3 font-medium">{key}</td>
+              {/* Diubah menjadi persen */}
+              <td className="p-3 font-bold">{(val * 100).toFixed(2)}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  {/* --- GANTI BLOK DIV TABEL POSTERIOR DENGAN INI --- */}
+<div>
+  <h4 className="font-semibold text-lg mb-2 text-gray-700">Tabel Posterior</h4>
+  <div className="overflow-x-auto bg-white rounded-lg shadow">
+    <table className="min-w-full text-sm text-left text-gray-800">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="p-3">Kelas</th>
+          <th className="p-3">Nilai Posterior</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.entries(predictionResult.posteriors).map(([key, val]) => (
+          <tr key={key} className="border-b border-gray-200 hover:bg-gray-50">
+            <td className="p-3 font-medium">{key}</td>
+            {/* Diubah menjadi persen dengan 6 angka desimal */}
+            <td className="p-3 font-bold">{(val * 100).toFixed(2)}%</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+{/* --- AKHIR KODE BARU --- */}
+
+                {/* Tabel Likelihood */}
+                <div>
+                  <h4 className="font-semibold text-lg mb-2 text-gray-700">Tabel Likelihood</h4>
+                  <div className="overflow-x-auto bg-white rounded-lg shadow">
+                    <table className="min-w-full text-sm text-left text-gray-800">
+                      <thead className="bg-gray-200">
+                        <tr>
+                          <th className="p-3">Atribut</th>
+                          {Object.keys(predictionResult.likelihoods).map(classLabel => (
+                            <th key={classLabel} className="p-3">{classLabel}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Object.keys(predictionResult.likelihoods[Object.keys(predictionResult.likelihoods)[0]]).map(attribute => (
+                          <tr key={attribute} className="border-b border-gray-200 hover:bg-gray-50">
+                            <td className="p-3 font-medium">{attribute}</td>
+                            {Object.keys(predictionResult.likelihoods).map(classLabel => (
+                              <td key={`${classLabel}-${attribute}`} className="p-3">
+                                {predictionResult.likelihoods[classLabel][attribute].toFixed(4)}
+                              </td>
                             ))}
-                          </ul>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <strong>Posteriors:</strong>
-                    <ul className="list-disc pl-5">
-                      {Object.entries(predictionResult.posteriors).map(([key, val]) => (
-                        <li key={key}>
-                          {key}: {typeof val === 'number' ? val.toFixed(4) : val}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <strong>Evidence:</strong>
-                    <p className="pl-5">
-    {typeof predictionResult.evidence === 'number'
-      ? Number(predictionResult.evidence).toFixed(4)
-      : '-'}
-  </p>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           )}
+          {/* --- AKHIR KODE BARU --- */}
         </div>
       </div>
     </div>
