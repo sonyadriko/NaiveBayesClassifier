@@ -4,9 +4,11 @@ import os
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from app.api.v1.router import api_router
 from app.core.config import get_settings
@@ -53,6 +55,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Configure Jinja2 templates
+templates = Jinja2Templates(directory="templates")
+
 # Register error handlers
 register_error_handlers(app)
 
@@ -89,6 +97,96 @@ async def health_check() -> JSONResponse:
     """
     return JSONResponse(
         ApiResponse.success(data={"status": "healthy"}, message="Service is running")
+    )
+
+
+# ============================================================================
+# Web Routes (HTML Pages)
+# ============================================================================
+
+
+@app.get("/login")
+async def login_page(request: Request):
+    """Render login/register page.
+
+    Args:
+        request: FastAPI request object.
+
+    Returns:
+        Template response with login page.
+    """
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
+@app.get("/dashboard")
+async def dashboard_page(request: Request):
+    """Render dashboard page.
+
+    Args:
+        request: FastAPI request object.
+
+    Returns:
+        Template response with dashboard page.
+    """
+    # Get user from token if available (optional - for SSR)
+    user = None
+    auth_header = request.headers.get("authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        # For SSR, you could decode the JWT here to get user info
+        # For now, the frontend will handle auth via localStorage
+        pass
+
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {"request": request, "user": user}
+    )
+
+
+@app.get("/prediction")
+async def prediction_page(request: Request):
+    """Render prediction page.
+
+    Args:
+        request: FastAPI request object.
+
+    Returns:
+        Template response with prediction page.
+    """
+    return templates.TemplateResponse(
+        "prediction.html",
+        {"request": request, "user": None}
+    )
+
+
+@app.get("/data")
+async def data_page(request: Request):
+    """Render data upload page.
+
+    Args:
+        request: FastAPI request object.
+
+    Returns:
+        Template response with data page.
+    """
+    return templates.TemplateResponse(
+        "data.html",
+        {"request": request, "user": None}
+    )
+
+
+@app.get("/evaluation")
+async def evaluation_page(request: Request):
+    """Render evaluation page.
+
+    Args:
+        request: FastAPI request object.
+
+    Returns:
+        Template response with evaluation page.
+    """
+    return templates.TemplateResponse(
+        "evaluation.html",
+        {"request": request, "user": None}
     )
 
 
