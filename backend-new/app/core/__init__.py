@@ -6,7 +6,6 @@ from app.core.security import (
     PasswordManager,
     TokenManager,
     create_token_response,
-    pwd_context,
 )
 
 __all__ = [
@@ -19,5 +18,4 @@ __all__ = [
     "PasswordManager",
     "TokenManager",
     "create_token_response",
-    "pwd_context",
 ]

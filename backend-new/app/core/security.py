@@ -1,17 +1,14 @@
 """Security utilities for authentication and password hashing."""
 
+import bcrypt
 from datetime import datetime, timedelta
 from typing import Any
 
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 
 from app.core.config import get_settings
 
 settings = get_settings()
-
-# Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class PasswordManager:
@@ -27,7 +24,8 @@ class PasswordManager:
         Returns:
             Hashed password.
         """
-        return pwd_context.hash(password)
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -40,7 +38,10 @@ class PasswordManager:
         Returns:
             True if password matches, False otherwise.
         """
-        return pwd_context.verify(plain_password, hashed_password)
+        return bcrypt.checkpw(
+            plain_password.encode('utf-8'),
+            hashed_password.encode('utf-8')
+        )
 
 
 class TokenManager:

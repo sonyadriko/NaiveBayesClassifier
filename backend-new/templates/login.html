@@ -437,7 +437,7 @@
 
             const data = await response.json();
 
-            if (response.ok && data.success) {
+            if (response.ok && data.meta && data.meta.status === 'success') {
                 setToken(data.data.access_token);
                 setUser(data.data.user);
                 showToast('Login successful! Redirecting...', 'success');
@@ -445,7 +445,7 @@
                     window.location.href = '/dashboard';
                 }, 800);
             } else {
-                showToast(data.message || 'Login failed', 'error');
+                showToast(data.meta?.message || 'Login failed', 'error');
             }
         } catch (error) {
             showToast('An error occurred. Please try again.', 'error');
@@ -488,12 +488,12 @@
 
             const data = await response.json();
 
-            if (response.ok && data.success) {
+            if (response.ok && data.meta && data.meta.status === 'success') {
                 showToast('Registration successful! Please login.', 'success');
                 switchTab('login');
                 document.getElementById('register-form').querySelector('form').reset();
             } else {
-                showToast(data.message || 'Registration failed', 'error');
+                showToast(data.meta?.message || 'Registration failed', 'error');
             }
         } catch (error) {
             showToast('An error occurred. Please try again.', 'error');

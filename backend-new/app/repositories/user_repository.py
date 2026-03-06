@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.models.user import User
 from app.repositories.base import BaseRepository
-from app.utils.response import Result
+from app.utils.response import Err, Ok, Result
 
 
 class UserRepository(BaseRepository[User]):
